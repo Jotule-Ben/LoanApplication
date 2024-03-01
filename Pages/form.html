@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Loan Application</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div id="navlogo">
+        <a href="../index.html">
+          <img src="../Assets/Bank-logo.png" />
+        </a>
+      </div>
+
+      <div id="nav-links">
+        <ul id="nav-links-ul">
+          <li><a href="">Home</a></li>
+          <li><a href="">Resources</a></li>
+          <li><a href="">Support</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <form action="">
+      <div>
+        <p>Please fill in your informations below.</p>
+      </div>
+
+      <div>
+        <label for="">How much do you want?</label> <br />
+        <input
+          type="number"
+          name=""
+          id="userLoanAmount"
+          min="0"
+          placeholder="How much do you want?"
+          class="userRequiredLoan"
+        />
+        <span id="errorMessageLoanAmount"></span>
+      </div>
+
+      <div>
+        <label for="">What is your credit history?</label> <br />
+        <select name="" id="creditHistory">
+          <option value=""></option>
+          <option value="1">Higher than six months</option>
+          <option value="0">Lower than six months</option>
+        </select>
+        <br />
+        <span id="errorMessageCredit"></span>
+      </div>
+
+      <div>
+        <label for="">When Was your Last Deposit Date?</label> <br />
+        <input type="date" name="" id="depositDate" />
+        <span id="errorMessageDate"></span>
+      </div>
+
+      <div>
+        <label for="">When Was your Last Loan collection Date?</label> <br />
+        <input type="date" name="" id="lastLoan" /> <br>
+        <span id="errorMessageDate"></span>
+      </div>
+
+      <div>
+        <label for="">When will be your Loan Repayment Date?</label> <br />
+        <input type="date" name="" id="loanRepayment" />
+        <span id="errorMessageDate"></span>
+      </div>
+
+      <div>
+        <label for="">Select your operated type</label> <br />
+        <select class="accounttype" name="" id="accounttype">
+          <option value=""></option>
+          <option value="1">Current</option>
+          <option value="0">Savings</option>
+        </select> <br>
+        <span id="errorMessageAcc"></span>
+      </div>
+
+      <button type="button" onclick="getLoan()" id="btn">Submit</button>
+    </form>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
