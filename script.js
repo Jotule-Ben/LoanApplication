@@ -55,8 +55,11 @@ function lastDepositDate() {
   let lastDepositValue = document.getElementById("depositDate");
   if (lastDepositValue.value === "") {
     lastDepositValue.classList.add("error");
+     let error = document.getElementById("errorMessageDate");
+     error.style.color = "red";
+     error.textContent = "Enter Your Last deposit date";
+     error.style.fontSize = "12px";
     return false;
-    //  errorMessageDate.textContent = "Select a Date";
   } else {
     let userDepositDate = new Date(lastDepositValue);
     let today = new Date();
@@ -84,7 +87,10 @@ function lastLoanDate() {
   let lastLoanValue = document.getElementById("lastLoan");
   if (lastLoanValue.value === "") {
     lastLoanValue.classList.add("error");
-    // lastLoanValue.textContent = "Select a Date";
+let error = document.getElementById("errorMessageCollectDate");
+error.style.color = "red";
+error.textContent = "Enter Your Last Loan Collection date";
+error.style.fontSize = "12px";
     return false;
   } else {
     let lastLoanValue = document.getElementById("lastLoan").value;
@@ -116,6 +122,10 @@ function loanRepaymentDate() {
   let loanRepaymentValue = document.getElementById("loanRepayment");
   if (loanRepaymentValue.value === "") {
     loanRepaymentValue.classList.add("error");
+    let error = document.getElementById("errorMessagePaymentDate");
+    error.style.color = "red";
+    error.textContent = "Enter Your Loan Payment date";
+    error.style.fontSize = "12px";
     return false;
   } else {
     let loanRepaymentValue = document.getElementById("loanRepayment").value;
