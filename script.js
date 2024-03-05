@@ -1,7 +1,6 @@
 let points = 0;
 const accountBalance = 210000;
 
-
 function getRequired() {
   let inputField = document.getElementById("userLoanAmount");
   let input = inputField.value;
@@ -11,6 +10,7 @@ function getRequired() {
     error.style.color = "red";
     error.textContent = "Enter Your Loan Amount";
     error.style.fontSize = "12px";
+    return false;
   } else if (input <= accountBalance * 0.45) {
     points += 10;
   } else {
@@ -25,6 +25,7 @@ document
 
     if (creditScore.value !== "") {
       creditScore.classList.remove("error");
+      return false;
     }
   });
 
@@ -33,6 +34,7 @@ function creditScoreChecker() {
   if (creditScore.value === "") {
     creditScore.classList.add("error");
     errorMessageCredit.textContent = "Select an option";
+    return false;
     // errorMessageCredit.append(errorMessageCredit);
   } else if (creditScore >= 1) {
     points = +10;
@@ -45,26 +47,28 @@ document.getElementById("depositDate").addEventListener("change", function () {
 
   if (lastDepositValue.value !== "") {
     lastDepositValue.classList.remove("error");
+    return false;
   }
 });
 
 function lastDepositDate() {
- let lastDepositValue = document.getElementById("depositDate");
- if (lastDepositValue.value === "") {
-   lastDepositValue.classList.add("error");
-  //  errorMessageDate.textContent = "Select a Date";
- } else {
-   let userDepositDate = new Date(lastDepositValue);
-   let today = new Date();
+  let lastDepositValue = document.getElementById("depositDate");
+  if (lastDepositValue.value === "") {
+    lastDepositValue.classList.add("error");
+    return false;
+    //  errorMessageDate.textContent = "Select a Date";
+  } else {
+    let userDepositDate = new Date(lastDepositValue);
+    let today = new Date();
 
-   let differenceInMs = today - userDepositDate;
+    let differenceInMs = today - userDepositDate;
 
-   let differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+    let differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
 
-   if (differenceInDays <= 30) {
-     points += 5;
-   }
- }
+    if (differenceInDays <= 30) {
+      points += 5;
+    }
+  }
 }
 
 document.getElementById("lastLoan").addEventListener("change", function () {
@@ -72,6 +76,7 @@ document.getElementById("lastLoan").addEventListener("change", function () {
 
   if (lastLoanValue.value !== "") {
     lastLoanValue.classList.remove("error");
+    return false;
   }
 });
 
@@ -80,22 +85,22 @@ function lastLoanDate() {
   if (lastLoanValue.value === "") {
     lastLoanValue.classList.add("error");
     // lastLoanValue.textContent = "Select a Date";
-  }else{
-  let lastLoanValue = document.getElementById("lastLoan").value;
-  let userLoanDate = new Date(lastLoanValue);
-  let today = new Date();
+    return false;
+  } else {
+    let lastLoanValue = document.getElementById("lastLoan").value;
+    let userLoanDate = new Date(lastLoanValue);
+    let today = new Date();
 
-  let differenceInMs = today - userLoanDate;
+    let differenceInMs = today - userLoanDate;
 
-  let differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+    let differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
 
-  if (differenceInDays >= 180) {
-    points += 10;
+    if (differenceInDays >= 180) {
+      points += 10;
+    }
+    console.log(points);
   }
-  console.log(points);
 }
-}
-
 
 document
   .getElementById("loanRepayment")
@@ -111,19 +116,20 @@ function loanRepaymentDate() {
   let loanRepaymentValue = document.getElementById("loanRepayment");
   if (loanRepaymentValue.value === "") {
     loanRepaymentValue.classList.add("error");
-  }else{
-  let loanRepaymentValue = document.getElementById("loanRepayment").value;
-  let userLoanTenure = new Date(loanRepaymentValue);
-  let today = new Date();
+    return false;
+  } else {
+    let loanRepaymentValue = document.getElementById("loanRepayment").value;
+    let userLoanTenure = new Date(loanRepaymentValue);
+    let today = new Date();
 
-  let differenceInMs = userLoanTenure - today;
+    let differenceInMs = userLoanTenure - today;
 
-  let differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+    let differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
 
-  if (differenceInDays <= 180) {
-    points += 10;
+    if (differenceInDays <= 180) {
+      points += 10;
+    }
   }
-}
 }
 
 document.getElementById("accounttype").addEventListener("change", function () {
@@ -131,6 +137,7 @@ document.getElementById("accounttype").addEventListener("change", function () {
 
   if (accType.value !== "") {
     accType.classList.remove("error");
+    return false;
   }
 });
 
@@ -139,6 +146,7 @@ function accountTypeChecker() {
   if (accType.value === "") {
     accType.classList.add("error");
     errorMessageAcc.textContent = "Select an option";
+    return false;
   } else if (accType >= 1) {
     points += 10;
   } else {
@@ -153,8 +161,19 @@ function getLoan() {
   lastLoanDate();
   loanRepaymentDate();
   accountTypeChecker();
-  if (points >= 30) {
+  if (
+    getRequired == false ||
+    creditScoreChecker == false ||
+    lastDepositDate == false ||
+    lastLoanDate == false ||
+    loanRepaymentDate == false ||
+    accountTypeChecker == false
+  ) {
+    window.location.href = "form.html";
+  } else if (points >= 30) {
     window.location.href = "approved.html";
+  } else if (points < 5) {
+    return;
   } else if (points <= 30) {
     window.location.href = "Unapproved.html";
   }
